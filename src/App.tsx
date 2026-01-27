@@ -187,12 +187,12 @@ function App() {
   return (
     <>
       {error && (
-        <div className="fixed top-0 left-0 right-0 bg-red-100 text-red-800 p-4 z-50 border-b border-red-300">
-          <div className="max-w-6xl mx-auto flex justify-between items-center">
-            <span>{error}</span>
+        <div className="fixed top-0 left-0 right-0 bg-red-100 text-red-800 p-3 sm:p-4 z-50 border-b border-red-300">
+          <div className="max-w-6xl mx-auto flex justify-between items-center gap-4">
+            <span className="text-sm sm:text-base flex-1">{error}</span>
             <button
               onClick={() => setError("")}
-              className="text-red-600 hover:text-red-800 font-semibold cursor-pointer"
+              className="text-red-600 hover:text-red-800 font-semibold cursor-pointer shrink-0"
             >
               ✕
             </button>
@@ -210,47 +210,49 @@ function App() {
           onSettings={() => setShowSettings(true)}
         />
       ) : viewMode === 'edit' ? (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <div className="min-h-screen bg-gray-100 p-3 sm:p-6">
           <div className="max-w-6xl mx-auto">
-            <div className="mb-6 flex justify-between items-center">
+            <div className="mb-4 sm:mb-6 flex flex-row gap-3 justify-between items-start sm:items-center">
               <button
                 onClick={handleBackToList}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-white rounded-lg hover:bg-gray-50 transition-colors font-semibold border border-gray-300 cursor-pointer"
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 text-gray-700 bg-white rounded-lg hover:bg-gray-50 transition-colors font-semibold border border-gray-300 cursor-pointer text-sm sm:text-base"
               >
-                <ArrowLeft className="w-5 h-5" />
-                Back to List
+                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Back to List</span>
+                <span className="sm:hidden">Back</span>
               </button>
               <button
                 onClick={handleSaveInvoice}
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-md hover:shadow-lg cursor-pointer"
+                className="w-auto px-4 sm:px-6 py-2 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold shadow-md hover:shadow-lg cursor-pointer text-sm sm:text-base"
               >
                 Save & Preview
               </button>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <InvoiceForm invoice={currentInvoice} setInvoice={setCurrentInvoice} />
               <InvoicePreview invoice={currentInvoice} printRef={printRef} />
             </div>
           </div>
         </div>
       ) : (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <div className="min-h-screen bg-gray-100 p-3 sm:p-6">
           <div className="max-w-6xl mx-auto">
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               <button
                 onClick={handleBackToList}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-white rounded-lg hover:bg-gray-50 transition-colors font-semibold border border-gray-300 cursor-pointer"
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 text-gray-700 bg-white rounded-lg hover:bg-gray-50 transition-colors font-semibold border border-gray-300 cursor-pointer text-sm sm:text-base"
               >
-                <ArrowLeft className="w-5 h-5" />
-                Back to List
+                <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Back to List</span>
+                <span className="sm:hidden">Back</span>
               </button>
             </div>
 
             <InvoicePreview invoice={currentInvoice} printRef={printRef} />
             <button
               onClick={handlePrint}
-              className="mt-4 w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg print:hidden cursor-pointer"
+              className="mt-4 w-full px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg print:hidden cursor-pointer text-sm sm:text-base"
             >
               Download PDF
             </button>
