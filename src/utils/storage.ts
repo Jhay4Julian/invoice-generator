@@ -1,11 +1,14 @@
 import type { Invoice } from "../types/invoice";
+import { loadCompanySettings } from "./company";
 
 const INVOICES_KEY = "invoices:list";
 
 export function saveInvoice(invoice: Invoice): void {
   try {
     const key = `invoice:${invoice.id}`;
-    localStorage.setItem(key, JSON.stringify(invoice));
+    // Don't store logo in localStorage to avoid quota issues - logos are too large
+    const { logo, ...invoiceWithoutLogo } = invoice;
+    localStorage.setItem(key, JSON.stringify(invoiceWithoutLogo));
     
     // Update invoice list
     const list = getInvoicesList();
@@ -23,7 +26,17 @@ export function loadInvoice(id: string): Invoice | null {
   try {
     const key = `invoice:${id}`;
     const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : null;
+    const invoice = raw ? JSON.parse(raw) : null;
+    
+    // If logo is missing, get it from company settings
+    if (invoice && !invoice.logo) {
+      const company = loadCompanySettings();
+      if (company?.logo) {
+        invoice.logo = company.logo;
+      }
+    }
+    
+    return invoice;
   } catch (error) {
     console.error("Failed to load invoice:", error);
     return null;

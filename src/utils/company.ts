@@ -4,7 +4,9 @@ const COMPANY_SETTINGS_KEY = "company:settings";
 
 export function saveCompanySettings(settings: CompanySettings): void {
   try {
-    localStorage.setItem(COMPANY_SETTINGS_KEY, JSON.stringify(settings));
+    // Don't store logo in localStorage to avoid quota issues
+    const { logo, ...settingsWithoutLogo } = settings;
+    localStorage.setItem(COMPANY_SETTINGS_KEY, JSON.stringify(settingsWithoutLogo));
   } catch (error) {
     console.error("Failed to save company settings:", error);
     throw new Error("Failed to save company settings");
