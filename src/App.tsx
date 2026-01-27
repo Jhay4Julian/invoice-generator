@@ -9,6 +9,8 @@ import CompanySettingsModal from './components/CompanySettingsModal';
 import { getAllInvoices, saveInvoice, deleteInvoice } from './utils/storage';
 import { getCompanySettingsOrDefaults } from './utils/company';
 import { ArrowLeft } from 'lucide-react';
+import { useReactToPrint } from 'react-to-print';
+import React from 'react';
 
 type ViewMode = 'list' | 'edit' | 'preview';
 
@@ -101,7 +103,7 @@ function App() {
         setError("Please add at least one line item");
         return;
       }
-      
+
       // Validate line items have descriptions
       const hasEmptyItems = currentInvoice.items.some(
         item => !item.description.trim()
@@ -110,7 +112,7 @@ function App() {
         setError("Please fill in all item descriptions");
         return;
       }
-      
+
       // Validate quantities and prices are positive
       const hasInvalidValues = currentInvoice.items.some(
         item => item.quantity <= 0 || item.unitPrice < 0
@@ -174,6 +176,13 @@ function App() {
     setShowSettings(false);
     setError("");
   };
+  
+
+  const printRef = React.useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: `Invoice_${currentInvoice.invoiceNumber}`,
+  });
 
   return (
     <>
@@ -221,7 +230,7 @@ function App() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <InvoiceForm invoice={currentInvoice} setInvoice={setCurrentInvoice} />
-              <InvoicePreview invoice={currentInvoice} />
+              <InvoicePreview invoice={currentInvoice} printRef={printRef} />
             </div>
           </div>
         </div>
@@ -238,7 +247,14 @@ function App() {
               </button>
             </div>
 
-            <InvoicePreview invoice={currentInvoice} />
+            <InvoicePreview invoice={currentInvoice} printRef={printRef} />
+            <button
+              onClick={handlePrint}
+              className="mt-4 w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg print:hidden cursor-pointer"
+            >
+              Download PDF
+            </button>
+
           </div>
         </div>
       )}
