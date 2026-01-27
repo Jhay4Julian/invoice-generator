@@ -6,6 +6,8 @@ import {
   calculateTotal,
 } from "../utils/calculations";
 import { useReactToPrint } from "react-to-print";
+import ClassicTemplate from "./ClassicTemplate";
+import ModernTemplate from "./ModernTemplate";
 
 interface Props {
   invoice: Invoice;
@@ -26,31 +28,26 @@ export default function InvoicePreview({ invoice }: Props) {
   return (
     <>
       <div ref={printRef} className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-xl font-semibold mb-4">Invoice Preview</h2>
-
-        <p><strong>Client:</strong> {invoice.clientName}</p>
-
-        <ul className="mt-4 space-y-2">
-          {invoice.items.map((item) => (
-            <li key={item.id} className="flex justify-between">
-              <span>{item.description}</span>
-              <span>
-                {item.quantity} × {item.unitPrice}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-4 border-t pt-4">
-          <p>Subtotal: {subtotal.toFixed(2)}</p>
-          <p>Tax: {tax.toFixed(2)}</p>
-          <p className="font-bold">Total: {total.toFixed(2)}</p>
-        </div>
+        {invoice.template === "classic" ? (
+          <ClassicTemplate
+            invoice={invoice}
+            subtotal={subtotal}
+            tax={tax}
+            total={total}
+          />
+        ) : (
+          <ModernTemplate
+            invoice={invoice}
+            subtotal={subtotal}
+            tax={tax}
+            total={total}
+          />
+        )}
       </div>
 
       <button
         onClick={handlePrint}
-        className="btn mt-4 w-full"
+        className="mt-4 w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg print:hidden cursor-pointer"
       >
         Download PDF
       </button>
