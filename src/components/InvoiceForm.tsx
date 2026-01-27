@@ -69,8 +69,8 @@ const InvoiceForm = ({ invoice, setInvoice }: Props) => {
     }
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow">
-            <h2 className="text-xl font-semibold mb-4">Invoice Details</h2>
+        <div className="bg-white p-4 sm:p-6 rounded-xl shadow">
+            <h2 className="text-lg sm:text-xl font-semibold mb-4">Invoice Details</h2>
 
             <div className="mb-8">
                 <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
@@ -95,10 +95,10 @@ const InvoiceForm = ({ invoice, setInvoice }: Props) => {
                     <Building2 className="w-4 h-4" />
                     Business Logo
                 </label>
-                <div className="flex items-center gap-4">
-                    <label className="flex-1 flex items-center justify-center gap-3 px-6 py-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all">
-                        <Upload className="w-5 h-5 text-gray-400" />
-                        <span className="text-sm text-gray-600">
+                <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+                    <label className="flex-1 w-full flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all">
+                        <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 shrink-0" />
+                        <span className="text-xs sm:text-sm text-gray-600 text-center">
                             {invoice.logo ? 'Change logo' : 'Upload your logo'}
                         </span>
                         <input
@@ -161,7 +161,7 @@ const InvoiceForm = ({ invoice, setInvoice }: Props) => {
                     placeholder="Street Address"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3"
                 />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                     <input
                         type="text"
                         value={invoice.clientCity || ""}
@@ -187,7 +187,7 @@ const InvoiceForm = ({ invoice, setInvoice }: Props) => {
             </div>
 
             {/* Date Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
                 <div>
                     <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
                         <Calendar className="w-4 h-4" />
@@ -252,7 +252,7 @@ const InvoiceForm = ({ invoice, setInvoice }: Props) => {
                             setInvoice({ ...invoice, taxRate: value });
                         }
                     }}
-                    className="w-1/3 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full sm:w-1/3 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     min="0"
                     max="100"
                     step="0.1"

@@ -19,7 +19,7 @@ export default function InvoicePreview({ invoice, printRef }: Props) {
 
   return (
     <>
-      <div ref={printRef} className="bg-white p-6 rounded-xl shadow">
+      <div ref={printRef} className="bg-white p-3 sm:p-6 rounded-xl shadow overflow-x-auto">
         {invoice.template === "classic" ? (
           <ClassicTemplate
             invoice={invoice}
