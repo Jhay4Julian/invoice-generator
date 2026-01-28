@@ -89,6 +89,7 @@ Logos are stored in memory and associated with company settings. Upload PNG, JPG
 ```
 src/
 ├── components/           # React components
+│   ├── LandingPage.tsx         # Landing page
 │   ├── InvoiceForm.tsx         # Invoice creation/editing form
 │   ├── InvoiceList.tsx         # Invoice list view with grid
 │   ├── InvoicePreview.tsx      # Invoice preview and templates
