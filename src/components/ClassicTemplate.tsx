@@ -111,8 +111,8 @@ function ClassicTemplate({ invoice, subtotal, tax, total }: Props) {
 
       {/* Footer */}
       <div className="border-t border-gray-300 pt-4 sm:pt-6 text-center text-xs sm:text-sm text-gray-600">
-        <p className="mb-2">Thank you for your business!</p>
-        <p>Please make payment within the specified due date.</p>
+        <p className="mb-2">{invoice.notes}</p>
+        <p>Please make payment within the specified due date. </p>
       </div>
     </div>
   );

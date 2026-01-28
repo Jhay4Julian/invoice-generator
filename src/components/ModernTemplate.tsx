@@ -167,7 +167,7 @@ function ModernTemplate({ invoice, subtotal, tax, total }: Props) {
 
           {/* Footer */}
           <div className="mt-6 sm:mt-8 text-center">
-            <p className="text-xs sm:text-sm text-gray-500">Thank you for your business!</p>
+            <p className="text-xs sm:text-sm text-gray-500">{invoice.notes}</p>
           </div>
         </div>
       </div>
