@@ -6,13 +6,14 @@ import InvoiceForm from './components/InvoiceForm';
 import InvoicePreview from './components/InvoicePreview';
 import InvoiceList from './components/InvoiceList';
 import CompanySettingsModal from './components/CompanySettingsModal';
+import LandingPage from './components/LandingPage';
 import { getAllInvoices, saveInvoice, deleteInvoice } from './utils/storage';
 import { getCompanySettingsOrDefaults } from './utils/company';
 import { ArrowLeft } from 'lucide-react';
 import { useReactToPrint } from 'react-to-print';
 import React from 'react';
 
-type ViewMode = 'list' | 'edit' | 'preview';
+type ViewMode = 'landing' | 'list' | 'edit' | 'preview';
 
 const initialItem: LineItem = {
   id: crypto.randomUUID(),
@@ -31,7 +32,7 @@ const createNewInvoice = (companySettings: CompanySettings): Invoice => ({
   items: [initialItem],
   taxRate: 0,
   notes: "Thank you for your business!",
-  template: "modern",
+  template: "classic",
   createdAt: new Date().toISOString(),
   companyName: companySettings.name,
   companyEmail: companySettings.email,
@@ -46,7 +47,7 @@ const createNewInvoice = (companySettings: CompanySettings): Invoice => ({
 });
 
 function App() {
-  const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [viewMode, setViewMode] = useState<ViewMode>('landing');
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [companySettings, setCompanySettings] = useState<CompanySettings>(getCompanySettingsOrDefaults());
   const [currentInvoice, setCurrentInvoice] = useState<Invoice>(createNewInvoice(companySettings));
@@ -200,7 +201,9 @@ function App() {
         </div>
       )}
 
-      {viewMode === 'list' ? (
+      {viewMode === 'landing' ? (
+        <LandingPage handleGetStarted={() => setViewMode('list')} />
+      ) : viewMode === 'list' ? (
         <InvoiceList
           invoices={invoices}
           onSelect={handlePreviewInvoice}
