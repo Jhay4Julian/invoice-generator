@@ -9,21 +9,23 @@ interface Props {
 
 const LineItemRow = ({ item, updateItem, onRemove }: Props) => {
     return (
-        <div className="flex flex-col gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors">
             {/* Description Row */}
             <div className="w-full">
+                <label className="text-xs text-gray-500">Description</label>
                 <input
                     type="text"
                     value={item.description}
                     onChange={e => updateItem(item.id, { description: e.target.value })}
-                    placeholder="Description"
+                    placeholder=""
                     className="w-full px-2 sm:px-3 py-2 bg-white text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
             </div>
 
             {/* Qty, Price, Amount, Remove Row */}
             <div className="flex gap-2 sm:gap-3 items-center">
-                <div className="w-16 sm:w-20 shrink-0">
+                <div className="w-16 shrink-0">
+                    <label className="text-xs text-gray-500">Quantity</label>
                     <input
                         type="number"
                         value={item.quantity}
@@ -41,6 +43,7 @@ const LineItemRow = ({ item, updateItem, onRemove }: Props) => {
                 </div>
 
                 <div className="w-20 sm:w-24 shrink-0">
+                    <label className="text-xs text-gray-500">Unit price</label>
                     <input
                         type="number"
                         value={item.unitPrice}
@@ -57,9 +60,16 @@ const LineItemRow = ({ item, updateItem, onRemove }: Props) => {
                     />
                 </div>
 
-                <div className="w-20 sm:w-24 px-2 py-2 bg-white rounded-lg border border-gray-200 font-semibold text-gray-700 text-xs sm:text-sm shrink-0">
-                    ${(item.quantity * item.unitPrice).toFixed(2)}
+                <div className="">
+                    <label className="text-xs text-gray-500">Amount</label>
+                    <div className="w-20 sm:w-22 px-2 py-2 bg-white rounded-lg border border-gray-200 font-semibold text-gray-700 text-sm">
+                        N{(item.quantity * item.unitPrice).toFixed(2)}
+                    </div>
                 </div>
+
+                {/* <div className="w-20 sm:w-24 px-2 py-2 bg-white rounded-lg border border-gray-200 font-semibold text-gray-700 text-xs sm:text-sm shrink-0">
+                    ${(item.quantity * item.unitPrice).toFixed(2)}
+                </div> */}
                 <button
                     onClick={() => onRemove(item.id)}
                     className="p-1 sm:p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer shrink-0"
