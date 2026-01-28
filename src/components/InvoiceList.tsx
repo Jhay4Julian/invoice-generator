@@ -37,14 +37,14 @@ export default function InvoiceList({
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={onCreateNew}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-sm sm:text-base cursor-pointer"
               >
                 <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
                 Create Invoice
               </button>
               <button
                 onClick={onSettings}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2 sm:py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold text-sm sm:text-base"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2 sm:py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors font-semibold text-sm sm:text-base cursor-pointer"
               >
                 <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
                 Company Settings
